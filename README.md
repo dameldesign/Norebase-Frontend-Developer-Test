@@ -31,7 +31,7 @@ This task is a real-world simulation, with a focus on creating a UI that could e
 ### Installation
 1. Clone the repository:
     ```bash
-    git clone [https://github.com/dameldesign/Norebase-Frontend-Developer-Test]
+    git clone https://github.com/dameldesign/Norebase-Frontend-Developer-Test
     ```
 2. Navigate to the project directory:
     ```bash
