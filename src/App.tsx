@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight, Coins } from "lucide-react";
+import { Coins } from "lucide-react";
 import CoinTable from "./components/CoinTable";
 import CoinModal from "./components/CoinModal";
 import { CoinData } from "./types";
+import Pagination from "./components/Pagination";
 
 function App() {
   const [coins, setCoins] = React.useState<CoinData[]>([]);
@@ -91,37 +92,18 @@ function App() {
 
               {/**
               |--------------------------------------------------
-              | Pagination controls
+              | Pagination
               |--------------------------------------------------
               */}
 
-              <div className="mt-6 flex items-center justify-between">
-                <div className="text-sm text-gray-400">
-                  Showing {start + 1} to{" "}
-                  {Math.min(start + itemsPerPage, coins.length)} of{" "}
-                  {coins.length} entries
-                </div>
-
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
-                    className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-                  >
-                    <ArrowLeft className="w-4 h-4" /> Previous
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      setCurrentPage((p) => Math.min(totalPages, p + 1))
-                    }
-                    disabled={currentPage === totalPages}
-                    className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-                  >
-                    Next <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                itemsPerPage={itemsPerPage}
+                totalItems={coins.length}
+                startIndex={start}
+                onPageChange={setCurrentPage}
+              />
             </>
           )}
         </div>

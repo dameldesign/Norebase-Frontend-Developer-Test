@@ -16,3 +16,13 @@ export interface CoinData {
   tsupply: string;
   msupply: string;
 }
+
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  itemsPerPage: number;
+  totalItems: number;
+  startIndex: number;
+  onPageChange: (page: number) => void;
+}
