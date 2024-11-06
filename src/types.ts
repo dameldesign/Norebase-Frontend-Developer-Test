@@ -26,3 +26,11 @@ export interface PaginationProps {
   startIndex: number;
   onPageChange: (page: number) => void;
 }
+
+
+export interface CoinModalProps {
+  coin: CoinData | null;
+  isOpen: boolean;
+  onClose: () => void;
+  isLoading: boolean;
+}

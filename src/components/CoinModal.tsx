@@ -1,23 +1,17 @@
 import React from "react";
-import {
-  X,
-  TrendingUp,
-  TrendingDown,
-  DollarSign,
-  Bitcoin,
-  BarChart3,
-  Clock,
-} from "lucide-react";
-import { CoinData } from "../types";
+import { X, DollarSign, Bitcoin, BarChart3, Clock } from "lucide-react";
+import { CoinModalProps } from "../types";
+import ModalSkeleton from "./ui/ModalSkeleton";
+import ChangeCard from "./ChangeCard";
+import PriceCard from "./PriceCard";
+import InfoRow from "./InfoRow";
 
-interface CoinModalProps {
-  coin: CoinData | null;
-  isOpen: boolean;
-  onClose: () => void;
-  isLoading: boolean;
-}
-
-function CoinModal({ coin, isOpen, onClose, isLoading }: CoinModalProps) {
+const CoinModal: React.FC<CoinModalProps> = ({
+  coin,
+  isOpen,
+  onClose,
+  isLoading,
+}) => {
   /**
   |--------------------------------------------------
   | Render nothing if the modal is not open
@@ -155,131 +149,6 @@ function CoinModal({ coin, isOpen, onClose, isLoading }: CoinModalProps) {
       </div>
     </div>
   );
-}
-
-function PriceCard({
-  title,
-  value,
-  icon,
-}: {
-  title: string;
-  value: string;
-  icon: React.ReactNode;
-}) {
-  /**
-  |--------------------------------------------------
-  | Display card for price data with title and value
-  |--------------------------------------------------
-  */
-  return (
-    <div className="bg-gray-700/30 rounded-lg p-4">
-      <div className="flex items-center gap-2 text-gray-400 mb-2">
-        {icon}
-        <span>{title}</span>
-      </div>
-      <div className="text-xl font-bold">{value}</div>
-    </div>
-  );
-}
-
-function ChangeCard({ title, value }: { title: string; value: number }) {
-  /**
-  |--------------------------------------------------
-  | Display card for percentage change with icon
-  |--------------------------------------------------
-  */
-  const isPositive = value >= 0;
-  return (
-    <div className="bg-gray-700/30 rounded-lg p-4">
-      <div className="text-gray-400 mb-2">{title}</div>
-      <div
-        className={`text-xl font-bold flex items-center gap-1 ${
-          isPositive ? "text-green-400" : "text-red-400"
-        }`}
-      >
-        {isPositive ? (
-          <TrendingUp className="w-5 h-5" />
-        ) : (
-          <TrendingDown className="w-5 h-5" />
-        )}
-        {Math.abs(value).toFixed(2)}%
-      </div>
-    </div>
-  );
-}
-
-function InfoRow({
-  title,
-  value,
-  icon,
-}: {
-  title: string;
-  value: string;
-  icon: React.ReactNode;
-}) {
-  /**
-  |--------------------------------------------------
-  | Display row for various market information
-  |--------------------------------------------------
-  */
-  return (
-    <div className="flex items-center justify-between p-4 bg-gray-700/30 rounded-lg">
-      <div className="flex items-center gap-2">
-        {icon}
-        <span className="text-gray-400">{title}</span>
-      </div>
-      <span className="font-medium">{value}</span>
-    </div>
-  );
-}
-
-function ModalSkeleton() {
-  /**
-  |--------------------------------------------------
-  | Loading skeleton for the modal when data is loading
-  |--------------------------------------------------
-  */
-  return (
-    <div className="p-6 animate-pulse">
-      <div className="flex items-center gap-4 mb-6">
-        <div className="bg-gray-700 rounded-full w-14 h-14"></div>
-        <div>
-          <div className="h-6 bg-gray-700 rounded w-32 mb-2"></div>
-          <div className="h-4 bg-gray-700 rounded w-20"></div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        {[1, 2].map((i) => (
-          <div key={i} className="bg-gray-700/30 rounded-lg p-4">
-            <div className="h-4 bg-gray-700 rounded w-24 mb-2"></div>
-            <div className="h-6 bg-gray-700 rounded w-32"></div>
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-gray-700/30 rounded-lg p-4">
-            <div className="h-4 bg-gray-700 rounded w-20 mb-2"></div>
-            <div className="h-6 bg-gray-700 rounded w-24"></div>
-          </div>
-        ))}
-      </div>
-
-      <div className="space-y-4">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <div
-            key={i}
-            className="flex items-center justify-between p-4 bg-gray-700/30 rounded-lg"
-          >
-            <div className="h-4 bg-gray-700 rounded w-32"></div>
-            <div className="h-4 bg-gray-700 rounded w-40"></div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+};
 
 export default CoinModal;

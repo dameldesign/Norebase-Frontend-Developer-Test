@@ -1,4 +1,4 @@
-
+import React from "react";
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { CoinData } from '../types';
 
@@ -7,7 +7,7 @@ interface CoinTableProps {
   onCoinClick: (coin: CoinData) => void;
 }
 
-function CoinTable({ coins, onCoinClick }: CoinTableProps) {
+const CoinTable: React.FC<CoinTableProps> = ({ coins, onCoinClick }) => {
   /**
   |--------------------------------------------------
   | Render a responsive table displaying coin data
